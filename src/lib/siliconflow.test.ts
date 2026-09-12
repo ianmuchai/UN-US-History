@@ -118,12 +118,29 @@ async function testUsesOpenRouterEnvConfig() {
     secondaryModel: 'openrouter-secondary',
   });
 }
+
+async function testStripsQuotedEnvValues() {
+  const config = getSiliconFlowConfig({
+    OPENROUTER_API_KEY: '"quoted-key"',
+    OPENROUTER_BASE_URL: '"https://openrouter.ai/api/v1/"',
+    OPENROUTER_MODEL: "'quoted-primary'",
+    OPENROUTER_MODEL_2: "'quoted-secondary'",
+  } as unknown as NodeJS.ProcessEnv);
+
+  assert.deepEqual(config, {
+    apiKey: 'quoted-key',
+    baseUrl: 'https://openrouter.ai/api/v1',
+    model: 'quoted-primary',
+    secondaryModel: 'quoted-secondary',
+  });
+}
 async function run() {
   await testMissingApiKeyReturnsNull();
   await testParsesOpenAiCompatibleResponse();
   await testSendsExpectedRequestBody();
   await testUsesProvidedEnvConfig();
   await testUsesOpenRouterEnvConfig();
+  await testStripsQuotedEnvValues();
   console.log('siliconflow helper tests passed');
 }
 

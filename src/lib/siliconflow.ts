@@ -29,7 +29,17 @@ function stripTrailingSlashes(value: string): string {
 
 function readEnvValue(env: NodeJS.ProcessEnv, key: string): string | undefined {
   const value = env[key]?.trim();
-  return value ? value : undefined;
+  if (!value) {
+    return undefined;
+  }
+
+  const quote = value[0];
+  if ((quote === '"' || quote === "'") && value.at(-1) === quote) {
+    const unquotedValue = value.slice(1, -1).trim();
+    return unquotedValue ? unquotedValue : undefined;
+  }
+
+  return value;
 }
 
 export function getSiliconFlowConfig(env: NodeJS.ProcessEnv = process.env): SiliconFlowConfig {
