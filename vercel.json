@@ -1,35 +1,10 @@
 {
-  "name": "us-climate-energy-policy-agent",
-  "version": "1.0.0",
-  "description": "US Climate & Energy Policy Agent - Next.js application",
-  "public": true,
-  "env": [
-    {
-      "key": "SILICONFLOW_API_KEY",
-      "description": "Server-side SiliconFlow API key. Keep this private and set it in the deployment environment.",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "SILICONFLOW_BASE_URL",
-      "description": "OpenAI-compatible SiliconFlow API base URL.",
-      "value": "https://api.siliconflow.com/v1",
-      "type": "string"
-    },
-    {
-      "key": "SILICONFLOW_MODEL",
-      "description": "Primary SiliconFlow chat model.",
-      "value": "openai/gpt-oss-120b",
-      "type": "string"
-    },
-    {
-      "key": "SILICONFLOW_MODEL_2",
-      "description": "Secondary SiliconFlow chat model used if the primary model fails.",
-      "value": "google/gemma-4-31B-it",
-      "type": "string"
-    }
-  ],
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "env": {
+    "SILICONFLOW_BASE_URL": "https://openrouter.ai/api/v1",
+    "SILICONFLOW_MODEL": "openai/gpt-oss-120b",
+    "SILICONFLOW_MODEL_2": "google/gemma-3-27b-it"
+  }
 }
