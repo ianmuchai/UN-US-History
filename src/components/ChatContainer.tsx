@@ -198,7 +198,7 @@ export const ChatContainer: React.FC = () => {
     }
   };
 
-  const modelLabel = latestSource === 'openrouter' ? 'OpenRouter' : latestSource === 'fallback' ? 'Local fallback' : 'Ready';
+  const modelLabel = latestSource === 'openrouter-error' ? 'OpenRouter error' : 'OpenRouter';
 
   return (
     <div className="min-h-dvh bg-[#f6f7f4] text-slate-950">

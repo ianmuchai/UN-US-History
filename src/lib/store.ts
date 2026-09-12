@@ -7,7 +7,7 @@ export interface ChatMessage {
   content: string;
   timestamp: Date;
   metadata?: {
-    source?: 'openrouter' | 'fallback' | string;
+    source?: 'openrouter' | 'openrouter-error' | string;
     theme?: string;
     citations?: string[];
   };

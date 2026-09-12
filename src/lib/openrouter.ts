@@ -120,7 +120,7 @@ export async function requestOpenRouterChat(input: {
         return content;
       }
     } catch {
-      // Return null after trying available models so callers can use local fallback.
+      // Return null after trying available models so callers can surface an OpenRouter error.
     }
   }
 

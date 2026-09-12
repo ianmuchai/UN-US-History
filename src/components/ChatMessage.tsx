@@ -70,8 +70,8 @@ function sourceLabel(source: string | undefined) {
     return { label: 'OpenRouter', icon: Cpu, className: 'border-teal-200 bg-teal-50 text-teal-800' };
   }
 
-  if (source === 'fallback') {
-    return { label: 'Local fallback', icon: Database, className: 'border-amber-200 bg-amber-50 text-amber-800' };
+  if (source === 'openrouter-error') {
+    return { label: 'OpenRouter error', icon: Database, className: 'border-amber-200 bg-amber-50 text-amber-800' };
   }
 
   return null;
