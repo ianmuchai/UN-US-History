@@ -34,10 +34,10 @@ function readEnvValue(env: NodeJS.ProcessEnv, key: string): string | undefined {
 
 export function getSiliconFlowConfig(env: NodeJS.ProcessEnv = process.env): SiliconFlowConfig {
   return {
-    apiKey: readEnvValue(env, 'SILICONFLOW_API_KEY'),
-    baseUrl: stripTrailingSlashes(readEnvValue(env, 'SILICONFLOW_BASE_URL') ?? DEFAULT_BASE_URL),
-    model: readEnvValue(env, 'SILICONFLOW_MODEL') ?? DEFAULT_MODEL,
-    secondaryModel: readEnvValue(env, 'SILICONFLOW_MODEL_2'),
+    apiKey: readEnvValue(env, 'OPENROUTER_API_KEY') ?? readEnvValue(env, 'SILICONFLOW_API_KEY'),
+    baseUrl: stripTrailingSlashes(readEnvValue(env, 'OPENROUTER_BASE_URL') ?? readEnvValue(env, 'SILICONFLOW_BASE_URL') ?? DEFAULT_BASE_URL),
+    model: readEnvValue(env, 'OPENROUTER_MODEL') ?? readEnvValue(env, 'SILICONFLOW_MODEL') ?? DEFAULT_MODEL,
+    secondaryModel: readEnvValue(env, 'OPENROUTER_MODEL_2') ?? readEnvValue(env, 'SILICONFLOW_MODEL_2'),
   };
 }
 

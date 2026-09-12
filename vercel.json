@@ -3,8 +3,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "env": {
-    "SILICONFLOW_BASE_URL": "https://openrouter.ai/api/v1",
-    "SILICONFLOW_MODEL": "openai/gpt-4o-mini",
-    "SILICONFLOW_MODEL_2": "google/gemma-3-27b-it"
+    "OPENROUTER_BASE_URL": "https://openrouter.ai/api/v1",`r`n    "OPENROUTER_MODEL": "openai/gpt-4o-mini",`r`n    "OPENROUTER_MODEL_2": "google/gemma-3-27b-it"
   }
 }

@@ -310,7 +310,7 @@ export async function POST(request: NextRequest) {
     const modelResponse = await requestSiliconFlowChat({
       messages: toSiliconFlowMessages(message, body.conversationHistory, usClimatePolicies),
     });
-    const responseSource = modelResponse ? 'siliconflow' : 'fallback';
+    const responseSource = modelResponse ? 'openrouter' : 'fallback';
     const fullResponse = (modelResponse ?? generateResponse(message, usClimatePolicies)).trim();
     const msgId = `msg-${Date.now()}`;
     const timestamp = new Date().toISOString();

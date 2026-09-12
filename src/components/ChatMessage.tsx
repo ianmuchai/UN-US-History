@@ -66,8 +66,8 @@ function renderMessageContent(content: string) {
 }
 
 function sourceLabel(source: string | undefined) {
-  if (source === 'siliconflow') {
-    return { label: 'SiliconFlow', icon: Cpu, className: 'border-teal-200 bg-teal-50 text-teal-800' };
+  if (source === 'openrouter' || source === 'siliconflow') {
+    return { label: 'OpenRouter', icon: Cpu, className: 'border-teal-200 bg-teal-50 text-teal-800' };
   }
 
   if (source === 'fallback') {

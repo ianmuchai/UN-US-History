@@ -98,11 +98,32 @@ async function testUsesProvidedEnvConfig() {
   });
 }
 
+
+async function testUsesOpenRouterEnvConfig() {
+  const config = getSiliconFlowConfig({
+    OPENROUTER_API_KEY: 'openrouter-key',
+    OPENROUTER_BASE_URL: 'https://openrouter.ai/api/v1/',
+    OPENROUTER_MODEL: 'openrouter-primary',
+    OPENROUTER_MODEL_2: 'openrouter-secondary',
+    SILICONFLOW_API_KEY: 'legacy-key',
+    SILICONFLOW_BASE_URL: 'https://legacy.example/v1',
+    SILICONFLOW_MODEL: 'legacy-primary',
+    SILICONFLOW_MODEL_2: 'legacy-secondary',
+  } as unknown as NodeJS.ProcessEnv);
+
+  assert.deepEqual(config, {
+    apiKey: 'openrouter-key',
+    baseUrl: 'https://openrouter.ai/api/v1',
+    model: 'openrouter-primary',
+    secondaryModel: 'openrouter-secondary',
+  });
+}
 async function run() {
   await testMissingApiKeyReturnsNull();
   await testParsesOpenAiCompatibleResponse();
   await testSendsExpectedRequestBody();
   await testUsesProvidedEnvConfig();
+  await testUsesOpenRouterEnvConfig();
   console.log('siliconflow helper tests passed');
 }
 
