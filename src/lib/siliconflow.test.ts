@@ -42,6 +42,8 @@ async function testParsesOpenAiCompatibleResponse() {
 async function testSendsExpectedRequestBody() {
   let requestUrl = '';
   let authorization = '';
+  let referer = '';
+  let title = '';
   let requestBody: unknown = null;
 
   await requestSiliconFlowChat({
@@ -53,7 +55,10 @@ async function testSendsExpectedRequestBody() {
     },
     fetcher: (async (input, init) => {
       requestUrl = String(input);
-      authorization = String(init?.headers && (init.headers as Record<string, string>).Authorization);
+      const headers = init?.headers as Record<string, string>;
+      authorization = String(headers.Authorization);
+      referer = String(headers['HTTP-Referer']);
+      title = String(headers['X-OpenRouter-Title']);
       requestBody = JSON.parse(String(init?.body));
 
       return new Response(
@@ -67,6 +72,8 @@ async function testSendsExpectedRequestBody() {
 
   assert.equal(requestUrl, 'https://api.siliconflow.com/v1/chat/completions');
   assert.equal(authorization, 'Bearer test-key');
+  assert.equal(referer, 'https://github.com/ianmuchai/UN-US-History');
+  assert.equal(title, 'US Climate & Energy Policy Agent');
   assert.deepEqual(requestBody, {
     model: 'openai/gpt-oss-120b',
     messages: [{ role: 'user', content: 'Hello' }],

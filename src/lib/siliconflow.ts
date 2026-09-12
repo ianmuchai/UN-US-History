@@ -18,8 +18,8 @@ type ChatCompletionResponse = {
   }>;
 };
 
-const DEFAULT_BASE_URL = 'https://api.siliconflow.com/v1';
-const DEFAULT_MODEL = 'openai/gpt-oss-120b';
+const DEFAULT_BASE_URL = 'https://openrouter.ai/api/v1';
+const DEFAULT_MODEL = 'openai/gpt-4o-mini';
 const DEFAULT_MAX_TOKENS = 900;
 const DEFAULT_TEMPERATURE = 0.2;
 
@@ -62,6 +62,8 @@ async function requestModel(input: {
     headers: {
       Authorization: `Bearer ${input.config.apiKey}`,
       'Content-Type': 'application/json',
+      'HTTP-Referer': 'https://github.com/ianmuchai/UN-US-History',
+      'X-OpenRouter-Title': 'US Climate & Energy Policy Agent',
     },
     body: JSON.stringify({
       model: input.model,
