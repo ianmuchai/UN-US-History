@@ -7,7 +7,7 @@ export interface ChatMessage {
   content: string;
   timestamp: Date;
   metadata?: {
-    source?: 'siliconflow' | 'fallback' | string;
+    source?: 'openrouter' | 'fallback' | string;
     theme?: string;
     citations?: string[];
   };

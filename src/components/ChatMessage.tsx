@@ -66,7 +66,7 @@ function renderMessageContent(content: string) {
 }
 
 function sourceLabel(source: string | undefined) {
-  if (source === 'openrouter' || source === 'siliconflow') {
+  if (source === 'openrouter') {
     return { label: 'OpenRouter', icon: Cpu, className: 'border-teal-200 bg-teal-50 text-teal-800' };
   }
 

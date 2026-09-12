@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { NextResponse } from 'next/server';
-import { getSiliconFlowConfig } from '@/lib/siliconflow';
+import { getOpenRouterConfig } from '@/lib/openrouter';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +13,7 @@ function keyFingerprint(apiKey: string | undefined): string | null {
 }
 
 export async function GET() {
-  const config = getSiliconFlowConfig();
+  const config = getOpenRouterConfig();
 
   return NextResponse.json({
     provider: 'openrouter',

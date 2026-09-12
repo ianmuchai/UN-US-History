@@ -1,9 +1,9 @@
-export type SiliconFlowMessage = {
+export type OpenRouterMessage = {
   role: 'system' | 'user' | 'assistant';
   content: string;
 };
 
-export type SiliconFlowConfig = {
+export type OpenRouterConfig = {
   apiKey?: string;
   baseUrl: string;
   model: string;
@@ -42,12 +42,12 @@ function readEnvValue(env: NodeJS.ProcessEnv, key: string): string | undefined {
   return value;
 }
 
-export function getSiliconFlowConfig(env: NodeJS.ProcessEnv = process.env): SiliconFlowConfig {
+export function getOpenRouterConfig(env: NodeJS.ProcessEnv = process.env): OpenRouterConfig {
   return {
-    apiKey: readEnvValue(env, 'OPENROUTER_API_KEY') ?? readEnvValue(env, 'SILICONFLOW_API_KEY'),
-    baseUrl: stripTrailingSlashes(readEnvValue(env, 'OPENROUTER_BASE_URL') ?? readEnvValue(env, 'SILICONFLOW_BASE_URL') ?? DEFAULT_BASE_URL),
-    model: readEnvValue(env, 'OPENROUTER_MODEL') ?? readEnvValue(env, 'SILICONFLOW_MODEL') ?? DEFAULT_MODEL,
-    secondaryModel: readEnvValue(env, 'OPENROUTER_MODEL_2') ?? readEnvValue(env, 'SILICONFLOW_MODEL_2'),
+    apiKey: readEnvValue(env, 'OPENROUTER_API_KEY'),
+    baseUrl: stripTrailingSlashes(readEnvValue(env, 'OPENROUTER_BASE_URL') ?? DEFAULT_BASE_URL),
+    model: readEnvValue(env, 'OPENROUTER_MODEL') ?? DEFAULT_MODEL,
+    secondaryModel: readEnvValue(env, 'OPENROUTER_MODEL_2'),
   };
 }
 
@@ -62,8 +62,8 @@ function parseCompletionContent(payload: ChatCompletionResponse): string | null 
 }
 
 async function requestModel(input: {
-  messages: SiliconFlowMessage[];
-  config: SiliconFlowConfig;
+  messages: OpenRouterMessage[];
+  config: OpenRouterConfig;
   fetcher: typeof fetch;
   model: string;
 }): Promise<string | null> {
@@ -91,12 +91,12 @@ async function requestModel(input: {
   return parseCompletionContent(payload);
 }
 
-export async function requestSiliconFlowChat(input: {
-  messages: SiliconFlowMessage[];
-  config?: SiliconFlowConfig;
+export async function requestOpenRouterChat(input: {
+  messages: OpenRouterMessage[];
+  config?: OpenRouterConfig;
   fetcher?: typeof fetch;
 }): Promise<string | null> {
-  const config = input.config ?? getSiliconFlowConfig();
+  const config = input.config ?? getOpenRouterConfig();
   const fetcher = input.fetcher ?? fetch;
 
   if (!config.apiKey || !config.model || input.messages.length === 0) {

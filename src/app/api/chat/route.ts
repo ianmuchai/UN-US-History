@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PolicyTheme, searchStatements, usClimatePolicies } from '@/lib/policyData';
-import { SiliconFlowMessage, requestSiliconFlowChat } from '@/lib/siliconflow';
+import { OpenRouterMessage, requestOpenRouterChat } from '@/lib/openrouter';
 
 interface ChatRequest {
   message: string;
@@ -53,12 +53,12 @@ function buildPolicySystemPrompt(policyData: PolicyTheme[]): string {
   ].join('\n');
 }
 
-function toSiliconFlowMessages(
+function toOpenRouterMessages(
   userMessage: string,
   conversationHistory: ChatRequest['conversationHistory'],
   policyData: PolicyTheme[]
-): SiliconFlowMessage[] {
-  const messages: SiliconFlowMessage[] = [
+): OpenRouterMessage[] {
+  const messages: OpenRouterMessage[] = [
     {
       role: 'system',
       content: buildPolicySystemPrompt(policyData),
@@ -307,8 +307,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const modelResponse = await requestSiliconFlowChat({
-      messages: toSiliconFlowMessages(message, body.conversationHistory, usClimatePolicies),
+    const modelResponse = await requestOpenRouterChat({
+      messages: toOpenRouterMessages(message, body.conversationHistory, usClimatePolicies),
     });
     const responseSource = modelResponse ? 'openrouter' : 'fallback';
     const fullResponse = (modelResponse ?? generateResponse(message, usClimatePolicies)).trim();
