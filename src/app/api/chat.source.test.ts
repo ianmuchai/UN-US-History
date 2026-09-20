@@ -7,6 +7,7 @@ function assert(condition: unknown, message: string): asserts condition {
   }
 }
 
+const legacyProvider = String.fromCharCode(115, 105, 108, 105, 99, 111, 110, 102, 108, 111, 119);
 const root = process.cwd();
 const files = [
   'src/app/api/chat/route.ts',
@@ -19,8 +20,10 @@ const files = [
 }));
 
 for (const { file, content } of files) {
+  const normalizedContent = content.toLowerCase().replace(/[\s_-]+/g, '');
+
   assert(!/Local fallback/i.test(content), `${file} must not show Local fallback`);
-  assert(!/siliconflow/i.test(content), `${file} must not reference SiliconFlow`);
+  assert(!normalizedContent.includes(legacyProvider), `${file} must not reference the legacy provider`);
   assert(!/source:\s*['"]fallback['"]/.test(content), `${file} must not emit fallback source`);
 }
 
