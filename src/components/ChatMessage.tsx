@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { ChatMessage as ChatMessageType } from '@/lib/store';
 import { formatDistanceToNow } from 'date-fns';
-import { BarChart3, Check, Copy, Cpu, Database, User } from 'lucide-react';
+import { BarChart3, Bot, Check, Copy, User } from 'lucide-react';
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -67,11 +67,11 @@ function renderMessageContent(content: string) {
 
 function sourceLabel(source: string | undefined) {
   if (source === 'openrouter') {
-    return { label: 'OpenRouter', icon: Cpu, className: 'border-teal-200 bg-teal-50 text-teal-800' };
+    return { label: 'Bot active', icon: Bot, className: 'border-teal-200 bg-teal-50 text-teal-800' };
   }
 
   if (source === 'openrouter-error') {
-    return { label: 'OpenRouter error', icon: Database, className: 'border-amber-200 bg-amber-50 text-amber-800' };
+    return { label: 'Bot needs setup', icon: Bot, className: 'border-amber-200 bg-amber-50 text-amber-800' };
   }
 
   return null;

@@ -130,8 +130,8 @@ export async function POST(request: NextRequest) {
       modelResponse ??
       (
         openRouterConfig.apiKey
-          ? 'OpenRouter is configured, but it did not return a usable response. Check the OpenRouter account, model access, or provider status.'
-          : 'OpenRouter API key is not configured for this deployment. Add OPENROUTER_API_KEY in Vercel Environment Variables and redeploy.'
+          ? 'The briefing bot is configured, but it did not return a usable response. Check the model account, access, or provider status.'
+          : 'The briefing bot is not configured for this deployment. Add the required bot API key in the deployment environment variables and redeploy.'
       )
     ).trim();
     const msgId = `msg-${Date.now()}`;

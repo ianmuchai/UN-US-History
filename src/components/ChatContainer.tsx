@@ -266,7 +266,7 @@ export const ChatContainer: React.FC = () => {
     }
   };
 
-  const modelLabel = latestSource === 'openrouter-error' ? 'OpenRouter needs attention' : 'OpenRouter ready';
+  const modelLabel = latestSource === 'openrouter-error' ? 'Bot needs setup' : 'Bot ready';
 
   return (
     <div className="min-h-dvh bg-transparent text-slate-950">

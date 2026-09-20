@@ -24,6 +24,15 @@ for (const { file, content } of files) {
   assert(!/source:\s*['"]fallback['"]/.test(content), `${file} must not emit fallback source`);
 }
 
+for (const { file, content } of files.filter(
+  ({ file }) => file.includes('components') || file === 'src/app/api/chat/route.ts'
+)) {
+  assert(
+    !/OpenRouter API key|OpenRouter error|OpenRouter ready|OpenRouter needs attention/i.test(content),
+    `${file} must not expose provider-branded status copy`
+  );
+}
+
 const page = readFileSync(join(root, 'src/app/page.tsx'), 'utf8');
 assert(page.includes("export const dynamic = 'force-dynamic'"), 'home page must not be statically cached');
 assert(page.includes('export const revalidate = 0'), 'home page must disable revalidation cache');
